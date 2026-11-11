@@ -1,280 +1,281 @@
-# Cost Curve — BJJ Ready to Go
+# BJJ Ready to Go — Cost Curve
 
-## Assumptions
+## Product and Assumptions
 
-All figures are planning hypotheses, not validated results.
+BJJ Ready to Go helps athletes prepare for competitions through
+personalized preparation plans, weight tracking and readiness insights.
 
-- Base subscription: $20 per athlete/month.
-- Deep preparation review add-on: $5 per completed review.
-- Base monthly usage: 30 daily summaries and 4 weekly analyses.
-- Deep-review adoption: 30% of subscribers buy one review/month.
-- AI request costs: Small $0.001, Mid $0.010, Frontier $0.050.
-- Specific providers and models: Not yet selected.
-- Potential wearable sources: Garmin, WHOOP, and Apple Watch.
-- Data imports and basic calculations use regular software, not LLM calls.
-- Wearable integration availability and costs require verification.
+Supported wearable integrations are planned for Garmin, WHOOP and
+Apple Watch.
+
+All figures below are planning assumptions for the course exercise.
+Replace them with pilot measurements before making launch decisions.
+
+| Assumption | Value | Basis |
+|---|---:|---|
+| Core subscription | $20/user/month | Selected price hypothesis |
+| Daily summaries | 30/user/month | One summary per day |
+| Weekly preparation reviews | 4/user/month | Approximately one review per week |
+| Video analysis adoption | 30% of subscribers/month | Initial demand hypothesis |
+| Video analyses per buyer | 2/month | Initial frequency hypothesis |
+| Video add-on price | $5/analysis | Proposed price |
+| Maximum video length | 10 minutes | Defines the priced unit |
+| Small-model cost per summary | $0.001 | Illustrative cost estimate |
+| Mid-model cost per review | $0.01 | Illustrative cost estimate |
+| Direct cost per video analysis | $1.50 | Initial cost budget |
+
+The $1.50 video budget includes model inference, media processing,
+direct storage and any direct human review averaged across analyses.
+Its component costs must be measured during the pilot.
 
 ## Packaging Decision
 
-| Category | Feature | Rationale |
+| Role | Feature | Packaging |
 |---|---|---|
-| Leader | Competition readiness dashboard combining weight, training, recovery, and competition date | Main reason athletes would subscribe |
-| Filler | Daily AI summaries and weekly trend explanations | Adds convenience and context |
-| Killer | On-demand deep competition preparation review | Potentially expensive, occasional feature that may justify separate pricing |
+| Leader | Personalized competition preparation plan with weight and readiness tracking | Included in the $20/month subscription |
+| Filler | Daily readiness summaries and weekly preparation reviews using training and wearable data | Included within the allowances below |
+| Killer | AI analysis of sparring videos with technical feedback | $5 per video of up to 10 minutes |
 
-### Killer Usage
+### Included Allowances
 
-- Actual adoption: Unknown.
-- Planning assumption: 30% of monthly subscribers.
-- This measures the percentage of users buying a review, not the percentage of AI requests.
-- Course heuristic: Below 70% adoption, consider an add-on.
-- Initial decision: Bundle routine preparation; sell deep reviews separately.
-- Reconsider after measuring demand, cost, and willingness to pay.
+- 30 daily summaries per billing month.
+- 4 weekly preparation reviews per billing month.
+- Preparation dashboard and weight tracking.
+- Wearable data synchronization.
+- Video analysis purchased separately.
+
+### Rationale
+
+Competition preparation is the main reason to subscribe, so the
+preparation workflow belongs in the core product.
+
+Video analysis serves a smaller segment and creates costs with each
+upload. Per-video pricing connects revenue to usage and limits the
+risk of heavy users consuming the core subscription margin.
+
+The assumed 30% monthly adoption supports testing video analysis
+as an add-on. The course's 70% rule is a packaging heuristic.
+Final packaging also depends on willingness to pay, costs and quality.
 
 ## Cost Model
 
-### Per-Feature Estimates
+### Core Subscription
 
-| Feature | Complexity | Model tier | Cost/request | Requests per adopting user/month |
-|---|---|---|---:|---:|
-| Daily summary | Simple | Small | $0.001 | 30 |
-| Weekly analysis | Medium | Mid | $0.010 | 4 |
-| Deep preparation review | Complex | Frontier | $0.050 | 1 |
+Model tiers describe intended workloads. Vendor and model selection
+will follow evaluations on representative BJJ cases.
 
-Costs are illustrative assumptions, not verified provider prices.
+| Feature | Complexity | Model tier | Cost per call | Calls/user/month | Share of core calls | Monthly cost |
+|---|---|---|---:|---:|---:|---:|
+| Daily readiness summary | Simple | Small | $0.001 | 30 | 88.24% | $0.03 |
+| Weekly preparation review | Medium | Mid | $0.01 | 4 | 11.76% | $0.04 |
+| Total | | | | 34 | 100% | $0.07 |
 
-### Base Subscription
+Calculations:
 
-Monthly requests:
-30 + 4 = 34.
+- Daily summaries = 30 × $0.001 = $0.03/month.
+- Weekly reviews = 4 × $0.01 = $0.04/month.
+- Core model cost = $0.03 + $0.04 = $0.07/user/month.
+- Blended core cost per call = $0.07 ÷ 34 = $0.00206.
 
-Monthly AI cost:
-(30 × $0.001) + (4 × $0.010) = $0.07.
+The denominator is 34 because the core plan assumes 30 daily
+summary calls and 4 weekly review calls.
 
-Blended cost per request:
-$0.07 ÷ 34 ≈ $0.00206.
+### Video Add-on
 
-| Tier | Requests/month | Volume share | Weighted cost/request |
-|---|---:|---:|---:|
-| Small | 30 | 88.24% | $0.00088 |
-| Mid | 4 | 11.76% | $0.00118 |
-| Blended | 34 | 100% | $0.00206 |
+| Item | Amount |
+|---|---:|
+| Revenue per analysis | $5.00 |
+| Budgeted direct cost per analysis | $1.50 |
+| Contribution per analysis | $3.50 |
+| Margin after modeled direct costs | 70% |
 
-Weighted cost/request = tier cost/request × its request share.
+One purchased analysis is a completed review of one video up to
+10 minutes long. It may require several model and processing calls.
 
-### Add-On and Portfolio Average
+### Blended Monthly Economics
 
-Assuming 30% of subscribers buy one deep review/month:
+Use a cohort of 100 paying subscribers:
 
-- AI cost per deep review: $0.05.
-- Average additional requests/subscriber: 30% × 1 = 0.3.
-- Average add-on AI cost/subscriber: 30% × $0.05 = $0.015.
-- Average total requests/subscriber: 34 + 0.3 = 34.3.
-- Average total AI cost/subscriber: $0.07 + $0.015 = $0.085.
-- Portfolio blended cost/request: $0.085 ÷ 34.3 ≈ $0.00248.
+- Subscription revenue = 100 × $20 = $2,000.
+- Video buyers = 100 × 30% = 30.
+- Video analyses = 30 × 2 = 60.
+- Video revenue = 60 × $5 = $300.
+- Core model cost = 100 × $0.07 = $7.
+- Video direct cost = 60 × $1.50 = $90.
 
-Fractional requests represent averages across subscribers.
+| Metric | Per 100 subscribers | Per subscriber |
+|---|---:|---:|
+| Subscription revenue | $2,000 | $20.00 |
+| Video add-on revenue | $300 | $3.00 |
+| Total revenue | $2,300 | $23.00 |
+| Core model cost | $7 | $0.07 |
+| Video direct cost | $90 | $0.90 |
+| Total modeled direct cost | $97 | $0.97 |
+| Revenue after modeled direct costs | $2,203 | $22.03 |
+| Margin after modeled direct costs | 95.78% | 95.78% |
 
-### Reconciliation with the Earlier Estimate
+Expected video usage is 0.6 analyses per subscriber per month:
 
-The earlier $0.12 estimate assumed every subscriber received:
-30 daily summaries, 4 weekly analyses, and 1 deep review.
+30% adoption × 2 analyses = 0.6.
 
-Updated packaging:
-- Base subscriber AI cost: $0.07/month.
-- Subscriber using one deep review: $0.12/month.
-- Portfolio average at 30% review adoption: $0.085/month.
-
-### Cost at Scale
-
-Assuming constant usage and 30% review adoption:
-
-| Active subscribers | Base AI cost/month | Add-on AI cost/month | Total AI cost/month |
-|---|---:|---:|---:|
-| 1,000 | $70 | $15 | $85 |
-| 10,000 | $700 | $150 | $850 |
+A video analysis can contain multiple calls, so it is excluded
+from the blended core cost-per-call calculation.
 
 ## Cascading Strategy
 
 ### Initial Routing
 
-Use application rules to select the model tier by feature:
+| Task | Initial approach | Escalation |
+|---|---|---|
+| Weight trends, dates and dashboard calculations | Deterministic code | Flag missing or inconsistent data |
+| Daily summary | Small model | Mid model if checks identify an unresolved issue |
+| Weekly preparation review | Mid model | Stronger model or human review when necessary |
+| Sparring video analysis | Media processing and a capable multimodal model | Human review when technical feedback cannot be supported |
 
-- Small: Daily summaries.
-- Mid: Weekly analysis.
-- Frontier: Deep preparation reviews.
+Use the least expensive approach that meets the quality and
+response-time requirements for each task.
 
-Base request split:
-88.24% Small / 11.76% Mid.
+### Router and Quality Checks
 
-Portfolio request split at 30% review adoption:
-87.46% Small / 11.66% Mid / 0.87% Frontier.
+- Validate input completeness before generating advice.
+- Check numerical outputs against deterministic calculations.
+- Check whether conclusions are supported by the supplied data.
+- Escalate unresolved cases rather than presenting unsupported certainty.
+- Record every call, retry and human review against the completed task.
 
-Percentages may not total exactly 100% due to rounding.
-
-This is initial tier-based routing, not a validated sequential cascade.
-No additional AI triage call is assumed.
-
-### Escalation
-
-- Define quality checks for each feature.
-- Escalate failed or unresolved requests to a stronger model or human review, as appropriate.
-- Count every model call, retry, and escalation in actual costs.
-- Do not assume a stronger model guarantees a correct or safe answer.
+The initial 88.24% small / 11.76% mid mix describes planned core
+calls before retries and escalations. It must be updated from logs.
 
 ### Evaluation
 
-Test representative scenarios for:
-- Factual accuracy.
-- Correct use of athlete data.
-- Missing or conflicting information.
-- Unsupported conclusions.
-- Safety and appropriate human escalation.
+Build a reference set of representative cases with reviewed answers.
+Compare candidate models and routing rules using:
 
-Confirm model assignments only after evaluation.
+- Correctness and usefulness.
+- Unsupported claims.
+- Response time.
+- Escalation and repeat-request rates.
+- Total cost per correctly completed task.
+
+When a cascade calls two models, include both calls in the cost.
 
 ## Pricing Model
 
-### Current Pricing
-
-Pre-launch: no existing paid plan.
-The $20 subscription is a planning assumption.
-
 ### Strategy
 
-Penetration: test an accessible entry price to encourage adoption.
+Start with an accessible subscription and charge separately for
+video analysis. Test willingness to pay and repeat usage before
+expanding the included allowances.
 
-Whether $20 is accessible must be validated with target athletes;
-no competitive price advantage has been established.
+| Pricing element | Proposed structure |
+|---|---|
+| Core plan | $20 per athlete per month |
+| Included AI usage | 30 daily summaries and 4 weekly reviews |
+| Add-on unit | One completed video analysis, up to 10 minutes |
+| Add-on price | $5 per analysis |
+| Overall model | Subscription plus usage |
+| Expected blended revenue | $23 per subscriber per month |
 
-### Proposed Structure
+Current paid pricing has not been validated. These are proposed
+prices for the exercise.
 
-Hybrid: subscription per athlete + usage-based add-on.
+### Value Validation
 
-Base: $20 per athlete/month.
+Test whether athletes:
 
-Includes:
-- Competition readiness dashboard.
-- Weight and training tracking.
-- Wearable connections where available.
-- Up to 30 daily AI summaries/month.
-- Up to 4 weekly AI analyses/month.
-
-Add-on: $5 per deep preparation review.
-
-Metered unit:
-One completed deep review delivered to the athlete.
-
-Failed requests and internal retries are not billed separately.
-The proposed price does not include unlimited AI usage.
-
-### Pricing Rationale
-
-- $20/month is the existing subscription hypothesis.
-- $5/review is a new willingness-to-pay hypothesis.
-- Neither price is established by AI inference cost alone.
-- Validate prices against athlete value, alternatives, and total delivery costs.
-
-### Value Proposition
-
-Help athletes and coaches bring preparation data into one place,
-understand trends, and coordinate preparation for a specific competition.
-
-Do not promise medical benefits, a successful weigh-in,
-or competition outcomes.
-
-### Revenue Scenario
-
-At 30% adoption and one add-on purchase per adopter/month:
-
-Average add-on revenue/subscriber:
-30% × $5 = $1.50.
-
-Average total revenue/subscriber:
-$20 + $1.50 = $21.50/month.
-
-This is a scenario, not a revenue forecast.
+- Understand the preparation plan and use it repeatedly.
+- Find the summaries helpful for preparation decisions.
+- Purchase video analysis at $5.
+- Return for another analysis.
+- Continue subscribing between competitions.
 
 ## Stress Tests
 
-Only AI cost per request changes.
-Usage, subscription price, and add-on adoption remain constant.
+### Direct Costs Increase
 
-### Base Subscription
+Hold prices, adoption and usage constant. Apply the multiplier to
+all modeled direct costs as a conservative cost stress.
 
-| Metric | Baseline | AI cost +50% | AI cost ×3 |
+| Metric | Baseline | Costs +50% | Costs ×3 |
 |---|---:|---:|---:|
-| Requests/user/month | 34 | 34 | 34 |
-| Blended cost/request | $0.00206 | $0.00309 | $0.00618 |
-| Monthly AI cost/user | $0.070 | $0.105 | $0.210 |
-| Revenue/user/month | $20.00 | $20.00 | $20.00 |
-| Revenue minus AI cost | $19.930 | $19.895 | $19.790 |
-| Margin after AI cost only | 99.65% | 99.48% | 98.95% |
+| Core cost/user/month | $0.07 | $0.105 | $0.21 |
+| Cost per video analysis | $1.50 | $2.25 | $4.50 |
+| Blended direct cost/user/month | $0.97 | $1.455 | $2.91 |
+| Blended revenue/user/month | $23.00 | $23.00 | $23.00 |
+| Revenue after modeled direct costs | $22.03 | $21.545 | $20.09 |
+| Margin after modeled direct costs | 95.78% | 93.67% | 87.35% |
+| Video add-on margin | 70% | 55% | 10% |
 
-### Deep Review Add-On
+The portfolio average can hide a weak add-on. At triple direct
+cost, each $5 video analysis contributes only $0.50 before
+remaining delivery costs.
 
-| Metric | Baseline | AI cost +50% | AI cost ×3 |
-|---|---:|---:|---:|
-| Revenue/review | $5.00 | $5.00 | $5.00 |
-| AI cost/review | $0.050 | $0.075 | $0.150 |
-| Revenue minus AI cost | $4.950 | $4.925 | $4.850 |
-| Margin after AI cost only | 99.00% | 98.50% | 97.00% |
+### Video Adoption Changes
 
-### Portfolio Average
+Hold purchase frequency at 2 videos per buyer and direct cost
+at $1.50 per analysis.
 
-Assumes 30% of subscribers buy one review/month.
+| Monthly adoption | Videos/subscriber | Revenue/subscriber | Modeled direct cost/subscriber | Revenue after modeled direct costs |
+|---|---:|---:|---:|---:|
+| 10% | 0.2 | $21.00 | $0.37 | $20.63 |
+| 30% | 0.6 | $23.00 | $0.97 | $22.03 |
+| 70% | 1.4 | $27.00 | $2.17 | $24.83 |
 
-| Metric | Baseline | AI cost +50% | AI cost ×3 |
-|---|---:|---:|---:|
-| Average requests/subscriber/month | 34.3 | 34.3 | 34.3 |
-| Average revenue/subscriber/month | $21.50 | $21.50 | $21.50 |
-| Average AI cost/subscriber/month | $0.085 | $0.1275 | $0.255 |
-| Revenue minus AI cost | $21.415 | $21.3725 | $21.245 |
-| Margin after AI cost only | 99.60% | 99.41% | 98.81% |
+Higher adoption increases revenue because each analysis is charged
+separately. Reconsider bundling after measuring adoption, willingness
+to pay and the effect on subscription conversion and retention.
 
-Calculations use unrounded values; displayed percentages are rounded.
+## Decision Criteria
 
-### Formulas
+### Core Subscription
 
-- Monthly AI cost = sum of requests × cost/request.
-- Blended cost/request = total AI cost ÷ total requests.
-- Average revenue = base price + adoption × add-on purchases × add-on price.
-- Revenue minus AI cost = revenue − AI cost.
-- Margin after AI cost only = (revenue − AI cost) ÷ revenue × 100%.
+Proceed with the proposed structure if pilot data supports:
 
-## Limitations and Excluded Costs
+- Willingness to pay $20/month.
+- Useful preparation outputs.
+- Acceptable response time.
+- Delivery costs consistent with the target margin.
 
-Not yet estimated:
-- Hosting and storage.
-- Wearable integration fees and maintenance.
+### Video Add-on
+
+Initial pilot targets:
+
+- At least 30% monthly adoption among paying subscribers.
+- Average direct cost no higher than $1.50 per analysis.
+- At least 80% of surveyed buyers rate the feedback as useful.
+- Technical feedback passes expert review for supported claims.
+
+If costs exceed the budget, review model selection, video length,
+processing design and pricing. Re-evaluate customer value before
+reducing output quality.
+
+## Cost Coverage and Limitations
+
+The model currently includes:
+
+- Core AI generation costs.
+- A combined direct-cost budget for video analysis.
+
+Add measured costs for:
+
+- Core hosting, database and storage.
+- Wearable integration operations and fees where applicable.
 - Payment processing.
-- Direct customer support.
-- Human review required to deliver the service.
-- Additional routing calls, retries, and evaluation overhead.
+- Customer support.
+- Core retries, escalations and human review.
+- Refunds and service credits.
 
-The percentages above are not full gross margins.
+Avoid counting video costs twice when replacing its combined
+$1.50 budget with measured component costs.
 
-Full gross margin:
-(Revenue − all applicable direct service costs) ÷ revenue × 100%.
+The reported percentages are margins after the modeled direct
+costs. Full gross margin requires all applicable cost of revenue.
+Operating profit also requires operating expenses.
 
-The current model does not establish profitability.
-Both demand and delivery costs remain unvalidated.
+## Next Actions
 
-## Conclusion
-
-Under these assumptions, AI inference costs remain small
-even if they triple.
-
-The main unresolved questions are willingness to pay,
-actual usage, full delivery costs, and whether deep reviews
-should be bundled or sold separately.
-
-## Next Steps
-
-1. Validate Leader, Filler, and Killer classifications with athletes.
-2. Test $20/month and $5/review willingness to pay.
-3. Measure deep-review adoption and repeat purchases.
-4. Select candidate models and verify current prices.
-5. Measure token usage, quality, retries, and escalation rates.
-6. Confirm wearable integration feasibility and costs.
-7. Add all direct service costs and recalculate full gross margin.
+1. Measure tokens, calls and retries for daily and weekly outputs.
+2. Benchmark video processing and expert-review costs.
+3. Test the $20 subscription and $5 video price with athletes.
+4. Run the reference cases through candidate routing setups.
+5. Replace the assumptions with pilot results and recalculate.
