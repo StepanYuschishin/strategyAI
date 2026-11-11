@@ -1,48 +1,49 @@
 # BJJ Ready to Go — Cost Curve
 
-## Product and Assumptions
+## Product and Planning Assumptions
 
 BJJ Ready to Go helps athletes prepare for competitions through
 personalized preparation plans, weight tracking and readiness insights.
 
-Supported wearable integrations are planned for Garmin, WHOOP and
-Apple Watch.
+Planned integrations include Garmin, WHOOP and Apple Watch.
 
-All figures below are planning assumptions for the course exercise.
-Replace them with pilot measurements before making launch decisions.
+The figures below are planning assumptions for the course exercise.
+Validate them through a pilot before committing to pricing.
 
 | Assumption | Value | Basis |
 |---|---:|---|
 | Core subscription | $20/user/month | Selected price hypothesis |
 | Daily summaries | 30/user/month | One summary per day |
-| Weekly preparation reviews | 4/user/month | Approximately one review per week |
-| Video analysis adoption | 30% of subscribers/month | Initial demand hypothesis |
-| Video analyses per buyer | 2/month | Initial frequency hypothesis |
+| Weekly preparation reviews | 4/user/month | Approximately one per week |
+| Video analysis adoption | 30% of subscribers/month | Demand hypothesis |
+| Video analyses per buyer | 2/month | Frequency hypothesis |
 | Video add-on price | $5/analysis | Proposed price |
-| Maximum video length | 10 minutes | Defines the priced unit |
-| Small-model cost per summary | $0.001 | Illustrative cost estimate |
-| Mid-model cost per review | $0.01 | Illustrative cost estimate |
+| Maximum video length | 10 minutes | Defines the purchased unit |
+| Small-model cost per summary | $0.001 | Illustrative estimate |
+| Mid-model cost per review | $0.01 | Illustrative estimate |
 | Direct cost per video analysis | $1.50 | Initial cost budget |
 
-The $1.50 video budget includes model inference, media processing,
-direct storage and any direct human review averaged across analyses.
-Its component costs must be measured during the pilot.
+The video budget includes inference, media processing, direct
+storage and direct human review averaged across analyses.
+
+Model costs are illustrative estimates rather than quoted vendor
+prices. Measure actual calls, tokens, retries and review time.
 
 ## Packaging Decision
 
 | Role | Feature | Packaging |
 |---|---|---|
 | Leader | Personalized competition preparation plan with weight and readiness tracking | Included in the $20/month subscription |
-| Filler | Daily readiness summaries and weekly preparation reviews using training and wearable data | Included within the allowances below |
-| Killer | AI analysis of sparring videos with technical feedback | $5 per video of up to 10 minutes |
+| Filler | Daily summaries and weekly preparation reviews using training and wearable data | Included within the plan allowances |
+| Killer | AI analysis of sparring videos with technical feedback | Paid add-on at $5 per video |
 
 ### Included Allowances
 
-- 30 daily summaries per billing month.
-- 4 weekly preparation reviews per billing month.
 - Preparation dashboard and weight tracking.
 - Wearable data synchronization.
-- Video analysis purchased separately.
+- 30 daily summaries per billing month.
+- 4 weekly preparation reviews per billing month.
+- Video analysis purchased separately, up to 10 minutes per video.
 
 ### Rationale
 
@@ -50,19 +51,19 @@ Competition preparation is the main reason to subscribe, so the
 preparation workflow belongs in the core product.
 
 Video analysis serves a smaller segment and creates costs with each
-upload. Per-video pricing connects revenue to usage and limits the
-risk of heavy users consuming the core subscription margin.
+upload. Per-video pricing connects revenue to usage and protects
+the subscription from unrestricted video processing costs.
 
-The assumed 30% monthly adoption supports testing video analysis
-as an add-on. The course's 70% rule is a packaging heuristic.
-Final packaging also depends on willingness to pay, costs and quality.
+The assumed monthly video adoption is 30%. The course's 70% rule
+supports testing an add-on, alongside willingness to pay, cost,
+quality and the role of the feature in the product's core promise.
 
 ## Cost Model
 
 ### Core Subscription
 
-Model tiers describe intended workloads. Vendor and model selection
-will follow evaluations on representative BJJ cases.
+Model tiers describe intended workloads. Select vendors and models
+after evaluating representative BJJ cases.
 
 | Feature | Complexity | Model tier | Cost per call | Calls/user/month | Share of core calls | Monthly cost |
 |---|---|---|---:|---:|---:|---:|
@@ -72,25 +73,25 @@ will follow evaluations on representative BJJ cases.
 
 Calculations:
 
-- Daily summaries = 30 × $0.001 = $0.03/month.
-- Weekly reviews = 4 × $0.01 = $0.04/month.
-- Core model cost = $0.03 + $0.04 = $0.07/user/month.
+- Daily summaries = 30 × $0.001 = $0.03.
+- Weekly reviews = 4 × $0.01 = $0.04.
+- Monthly core model cost = $0.03 + $0.04 = $0.07.
 - Blended core cost per call = $0.07 ÷ 34 = $0.00206.
 
-The denominator is 34 because the core plan assumes 30 daily
-summary calls and 4 weekly review calls.
+The denominator is 34 because the plan assumes 30 summary calls
+and 4 review calls before retries and escalations.
 
 ### Video Add-on
 
-| Item | Amount |
+| Metric | Per analysis |
 |---|---:|
-| Revenue per analysis | $5.00 |
-| Budgeted direct cost per analysis | $1.50 |
-| Contribution per analysis | $3.50 |
-| Margin after modeled direct costs | 70% |
+| Revenue | $5.00 |
+| Budgeted direct cost | $1.50 |
+| Revenue after modeled direct cost | $3.50 |
+| Margin after modeled direct cost | 70% |
 
 One purchased analysis is a completed review of one video up to
-10 minutes long. It may require several model and processing calls.
+10 minutes long. It may require multiple model calls.
 
 ### Blended Monthly Economics
 
@@ -114,12 +115,42 @@ Use a cohort of 100 paying subscribers:
 | Revenue after modeled direct costs | $2,203 | $22.03 |
 | Margin after modeled direct costs | 95.78% | 95.78% |
 
-Expected video usage is 0.6 analyses per subscriber per month:
+Expected video usage per subscriber is:
 
-30% adoption × 2 analyses = 0.6.
+30% adoption × 2 analyses = 0.6 analyses/month.
 
-A video analysis can contain multiple calls, so it is excluded
-from the blended core cost-per-call calculation.
+### Margin Calculator
+
+For this calculator, a request means one completed user task:
+a daily summary, a weekly review or a video analysis.
+
+This unit differs from an individual model call. A video analysis
+may require several calls, all included in its direct-cost budget.
+
+| Metric | Baseline | Stress — costs ×3 |
+|---|---:|---:|
+| Average completed tasks/user/month | 34.6 | 34.6 |
+| Blended modeled cost per task | $0.02803 | $0.08410 |
+| Monthly modeled COGS/user | $0.97 | $2.91 |
+| Revenue/user/month | $23.00 | $23.00 |
+| Revenue minus modeled COGS/user | $22.03 | $20.09 |
+| Margin after modeled COGS | 95.78% | 87.35% |
+
+Calculations:
+
+- Tasks = 30 + 4 + (30% × 2) = 34.6.
+- Monthly cost = (30 × $0.001) + (4 × $0.01)
+  + (0.6 × $1.50) = $0.97.
+- Blended cost per task = $0.97 ÷ 34.6 = $0.02803.
+- Monthly revenue = $20 + (0.6 × $5) = $23.
+- Baseline margin = ($23 − $0.97) ÷ $23 = 95.78%.
+- Stress cost = $0.97 × 3 = $2.91.
+- Stress margin = ($23 − $2.91) ÷ $23 = 87.35%.
+
+Use unrounded values in calculations.
+
+The $0.00206 core cost per call covers the text workload.
+The $0.02803 blended cost per task also includes video processing.
 
 ## Cascading Strategy
 
@@ -132,24 +163,27 @@ from the blended core cost-per-call calculation.
 | Weekly preparation review | Mid model | Stronger model or human review when necessary |
 | Sparring video analysis | Media processing and a capable multimodal model | Human review when technical feedback cannot be supported |
 
-Use the least expensive approach that meets the quality and
-response-time requirements for each task.
+Use the least expensive approach that meets quality and
+response-time requirements.
 
-### Router and Quality Checks
+### Routing and Quality Checks
 
-- Validate input completeness before generating advice.
+- Validate input completeness.
 - Check numerical outputs against deterministic calculations.
 - Check whether conclusions are supported by the supplied data.
-- Escalate unresolved cases rather than presenting unsupported certainty.
-- Record every call, retry and human review against the completed task.
+- Escalate unresolved cases.
+- Record calls, retries and human review against the completed task.
 
-The initial 88.24% small / 11.76% mid mix describes planned core
-calls before retries and escalations. It must be updated from logs.
+The planned core mix is 88.24% small-model calls and 11.76%
+mid-model calls before retries and escalations.
+
+When a cascade calls two models, include both calls in its cost.
+Measure the actual routing mix during the pilot.
 
 ### Evaluation
 
 Build a reference set of representative cases with reviewed answers.
-Compare candidate models and routing rules using:
+Compare models and routing rules using:
 
 - Correctness and usefulness.
 - Unsupported claims.
@@ -157,17 +191,11 @@ Compare candidate models and routing rules using:
 - Escalation and repeat-request rates.
 - Total cost per correctly completed task.
 
-When a cascade calls two models, include both calls in the cost.
-
 ## Pricing Model
 
-### Strategy
+### Proposed Structure
 
-Start with an accessible subscription and charge separately for
-video analysis. Test willingness to pay and repeat usage before
-expanding the included allowances.
-
-| Pricing element | Proposed structure |
+| Element | Proposed pricing |
 |---|---|
 | Core plan | $20 per athlete per month |
 | Included AI usage | 30 daily summaries and 4 weekly reviews |
@@ -176,15 +204,18 @@ expanding the included allowances.
 | Overall model | Subscription plus usage |
 | Expected blended revenue | $23 per subscriber per month |
 
-Current paid pricing has not been validated. These are proposed
-prices for the exercise.
+The initial strategy is to offer an accessible subscription and
+charge separately for video analysis.
+
+Validate willingness to pay and repeat usage before expanding
+the included allowances.
 
 ### Value Validation
 
 Test whether athletes:
 
-- Understand the preparation plan and use it repeatedly.
-- Find the summaries helpful for preparation decisions.
+- Understand and repeatedly use the preparation plan.
+- Find the summaries useful.
 - Purchase video analysis at $5.
 - Return for another analysis.
 - Continue subscribing between competitions.
@@ -206,9 +237,16 @@ all modeled direct costs as a conservative cost stress.
 | Margin after modeled direct costs | 95.78% | 93.67% | 87.35% |
 | Video add-on margin | 70% | 55% | 10% |
 
-The portfolio average can hide a weak add-on. At triple direct
-cost, each $5 video analysis contributes only $0.50 before
+The modeled portfolio remains above the course's 40% stress
+threshold.
+
+However, the video add-on falls to 10% margin when its direct
+cost triples. Each analysis then contributes only $0.50 before
 remaining delivery costs.
+
+Monitor the add-on separately from the portfolio average.
+At higher costs, review processing design, model selection,
+video duration and pricing.
 
 ### Video Adoption Changes
 
@@ -221,20 +259,22 @@ at $1.50 per analysis.
 | 30% | 0.6 | $23.00 | $0.97 | $22.03 |
 | 70% | 1.4 | $27.00 | $2.17 | $24.83 |
 
-Higher adoption increases revenue because each analysis is charged
-separately. Reconsider bundling after measuring adoption, willingness
-to pay and the effect on subscription conversion and retention.
+Higher adoption increases revenue because each analysis is
+charged separately.
+
+Reconsider bundling after measuring adoption, willingness to pay,
+costs and effects on conversion and retention.
 
 ## Decision Criteria
 
 ### Core Subscription
 
-Proceed with the proposed structure if pilot data supports:
+Validate:
 
 - Willingness to pay $20/month.
 - Useful preparation outputs.
 - Acceptable response time.
-- Delivery costs consistent with the target margin.
+- Total delivery costs consistent with the target margin.
 
 ### Video Add-on
 
@@ -245,9 +285,7 @@ Initial pilot targets:
 - At least 80% of surveyed buyers rate the feedback as useful.
 - Technical feedback passes expert review for supported claims.
 
-If costs exceed the budget, review model selection, video length,
-processing design and pricing. Re-evaluate customer value before
-reducing output quality.
+These targets are hypotheses for the pilot.
 
 ## Cost Coverage and Limitations
 
@@ -259,23 +297,34 @@ The model currently includes:
 Add measured costs for:
 
 - Core hosting, database and storage.
-- Wearable integration operations and fees where applicable.
+- Wearable integration operations and applicable fees.
 - Payment processing.
 - Customer support.
 - Core retries, escalations and human review.
 - Refunds and service credits.
 
-Avoid counting video costs twice when replacing its combined
-$1.50 budget with measured component costs.
+When replacing the combined $1.50 video budget with measured
+components, remove the combined budget to avoid double counting.
 
-The reported percentages are margins after the modeled direct
-costs. Full gross margin requires all applicable cost of revenue.
+The reported percentages measure margin after modeled direct costs.
+Complete gross margin requires all applicable cost of revenue.
 Operating profit also requires operating expenses.
+
+## Current Decision
+
+Test the $20 core subscription and $5 video add-on.
+
+The assumptions suggest sufficient room to investigate the product
+economics further. The video add-on is the clearest cost sensitivity.
+
+Confirm quality, willingness to pay and complete delivery costs
+before treating the modeled margins as achievable.
 
 ## Next Actions
 
-1. Measure tokens, calls and retries for daily and weekly outputs.
+1. Measure calls, tokens and retries for daily and weekly outputs.
 2. Benchmark video processing and expert-review costs.
-3. Test the $20 subscription and $5 video price with athletes.
-4. Run the reference cases through candidate routing setups.
-5. Replace the assumptions with pilot results and recalculate.
+3. Test subscription and add-on willingness to pay.
+4. Evaluate candidate models and routing rules on reviewed cases.
+5. Add the remaining delivery costs.
+6. Replace assumptions with pilot results and recalculate.
