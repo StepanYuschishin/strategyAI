@@ -69,9 +69,9 @@ The course's 70% rule is an initial heuristic.
 A task is one completed user output. A task can require multiple
 model calls. Video cost covers the complete processing workflow.
 
-The 0.6 expected videos per subscriber comes from:
+Expected video usage:
 
-30% adoption × 2 videos per buyer = 0.6.
+30% adoption × 2 videos per buyer = 0.6 videos/subscriber/month.
 
 ### Core Text Costs Including Escalations
 
@@ -108,7 +108,7 @@ Calculations use unrounded task shares.
 
 - Daily cost/task = $0.001 + (10% × $0.05) = $0.006.
 - Weekly cost/task = $0.01 + (10% × $0.05) = $0.015.
-- Monthly cost = 34.6 tasks × unrounded blended cost = $1.14.
+- Monthly cost = 34.6 × unrounded blended cost = $1.14.
 
 The blended figure combines text generation costs and the broader
 video direct-cost budget.
@@ -196,13 +196,11 @@ Pass unresolved or approval-dependent cases to a qualified person.
 - 90% of core text tasks complete without a Frontier call.
 - 10% require one additional Frontier call.
 
-This is a task escalation assumption.
-
 The initial core call mix is 88.24% Small and 11.76% Mid.
-That mix describes the planned starting calls.
+This describes the planned starting calls.
 
 Both calls are charged when a task escalates.
-The cost model includes the expected additional Frontier calls.
+The cost model includes the additional Frontier calls.
 
 ### Evaluation
 
@@ -222,17 +220,80 @@ Test the escalation rule as well as individual models.
 
 ## Pricing Model
 
+### Pricing Strategy
+
+Selected strategy — Penetrate.
+
+Start with a $20 monthly subscription to test adoption among
+competition-focused BJJ athletes. Offer costly video analysis
+as a separate purchase.
+
+This is a launch hypothesis. Validate affordability, willingness
+to pay and competitive positioning before confirming the strategy.
+
+### Customer and Value
+
+Initial customer — an athlete preparing for a scheduled competition.
+
+Expected value:
+
+- A preparation plan connected to the competition date.
+- Weight and readiness information in one place.
+- Less manual work combining training and wearable data.
+- Actionable technical feedback from purchased video reviews.
+
+### Unit of Work
+
+- Core billing unit — one athlete subscription month.
+- Add-on billing unit — one completed video analysis up to 10 minutes.
+- Completion — the analysis and technical feedback are delivered.
+- Failed processing — no paid unit is consumed.
+- Internal retries are included in delivery costs.
+
+The add-on price pays for an analysis. It does not guarantee a
+competition result.
+
+### Price Structure
+
 | Element | Proposed structure |
 |---|---|
-| Core price | $20/athlete/month |
+| Current pricing | Pre-launch, with no validated paid price |
+| Proposed core price | $20/athlete/month |
 | Included AI allowance | 30 daily summaries and 4 weekly reviews |
-| Add-on unit | One completed video analysis up to 10 minutes |
-| Add-on price | $5 |
-| Pricing model | Subscription plus usage |
+| Usage price | $5/completed video analysis |
+| Maximum video length | 10 minutes |
+| Pricing model | Hybrid subscription plus usage |
 | Expected blended revenue | $23/subscriber/month |
 
-Validate willingness to pay, repeat purchase and retention before
-expanding the included allowances.
+Expected blended revenue:
+
+$20 + (30% adoption × 2 videos × $5) = $23/month.
+
+### Value and Labor Test
+
+Compare the proposed prices with the customer's current workflow:
+
+- How much time does the athlete spend combining preparation data?
+- What alternatives do they currently use or pay for?
+- Does the video feedback help them identify useful training actions?
+- Will they pay again after trying the product?
+
+Collect these answers through interviews and paid pilot purchases.
+Measure any claimed time savings before using them in marketing.
+
+### Pricing Validation
+
+Test:
+
+- Purchase conversion at $20/month.
+- Paid video adoption at $5.
+- Repeat video purchases.
+- Subscription retention between competitions.
+- Refunds and perceived value.
+- Total cost per successfully delivered output.
+
+Review pricing and allowances when evidence shows a change in
+customer value, usage or delivery costs.
 
 ## Stress Tests
 
@@ -269,8 +330,8 @@ Hold other assumptions constant.
 
 Core cost = $0.07 + (34 × escalation rate × $0.05).
 
-Increase escalation when it improves successful resolution enough
-to justify the added cost and response time.
+Increase escalation when improved successful resolution justifies
+the added cost and response time.
 
 ### Video Adoption Changes
 
@@ -320,11 +381,12 @@ Operating profit also requires operating expenses.
 
 ## Current Decision and Next Actions
 
-Test the $20 subscription and $5 video add-on.
+Test the $20 subscription and $5 video add-on using a penetration
+pricing hypothesis.
 
 1. Benchmark candidate models on reviewed BJJ cases.
-2. Measure real token usage and cost per completed task.
+2. Measure token usage and cost per completed task.
 3. Test escalation rules and human handoffs.
 4. Measure video processing and review costs.
-5. Validate willingness to pay and repeat usage.
+5. Validate willingness to pay, repeat purchase and retention.
 6. Add remaining delivery costs and recalculate margins.
