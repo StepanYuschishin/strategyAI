@@ -37,15 +37,17 @@
 
 ## Confidence UX Design
 
-**Approach:** show uncertainty / tiered confidence / human-in-loop trigger
+**Approach:** Combine visible uncertainty, three response modes, and a human handoff. Show the source and its update time beside event facts. Use the percentage bands below only after the confidence score has been calibrated on the golden dataset and fresh cases; a model's self-reported confidence is not enough. Missing evidence, conflicting sources, or a high-risk weight/health question overrides any score.
 
-**High confidence (>90%):**
+**High confidence (>90%):** Give a direct answer for a low-risk fact when the official source is current and matches the athlete's event and division. Show the source and timestamp. Example: “Example Open registration closes on 20 Nov at 18:00 CET. Source: official event page.” Offer **View source** and **Report an error**.
 
-**Medium confidence (70-90%):**
+**Uncertain (50-90%):** Soften the wording, show what is known and what is missing, and offer a way to verify. Example: “The event page lists weigh-in at 08:00, but I cannot confirm whether that applies to your division. Check with the organizer.” Do not present an estimate as a confirmed rule.
 
-**Low confidence (<70%):**
+**Not confident (<50%):** Do not give a definitive answer. Show “I can't verify this yet,” explain the missing or conflicting evidence, and route to the right person: organizer for event rules, qualified clinician or coach for weight/health planning. In the app, provide a **Contact organizer** or **Ask a professional** action rather than an invented answer.
 
-**User control surface:**
+**User control surface:** Users may view sources and a short explanation of how the answer was checked, correct their own data, report a wrong answer, request human review, or choose a stricter review preference. They cannot lower mandatory safety thresholds. Corrections are logged for review and future evals; they do not automatically retrain a model. Do not expose private chain-of-thought text.
+
+**Mode override examples:** Row 1 can be high confidence if the official deadline is current and matched. Row 6 must abstain because wearable data is stale. Row 8 must show both weigh-in times and hand off to the organizer even if a model assigns itself a high score. Row 9 must never produce a dehydration plan.
 
 ## Reliability Contract
 
