@@ -51,16 +51,25 @@
 
 ## Reliability Contract
 
+**Status:** proposed launch contract for BJJ Ready to Go. These thresholds are decisions to test, not measured product performance. The ten synthetic golden cases above help define expected behavior; they cannot establish accuracy, hallucination, or drift rates. Before launch, expand the set with verified event records and reviewed athlete scenarios, assign an on-call owner, and instrument the measurements below. Report every rate with its numerator, denominator, and sample period.
+
 | Metric | Target | Measurement | Alert Threshold |
 |--------|--------|-------------|-----------------|
-| Accuracy | | | |
-| Hallucination rate | | | |
-| Latency (p95) | | | |
-| Drift velocity | | | |
+| Accuracy | At least 95% of source-backed, lower-risk answers pass their case rubric; zero critical failures on registration, weigh-in, division rules, or unsafe health advice. | Run rule checks and human-reviewed rubric checks on a versioned, verified test set before each model, prompt, router, or source change and weekly thereafter. Track passes / reviewed cases by task and risk level. | Any critical failure blocks release or disables the affected answer route. A measured pass rate below 95% triggers investigation; do not claim the rate from the ten synthetic cases. |
+| Hallucination rate | Below 1% of audited factual answers contain an unsupported claim; zero invented event rules, numbers, or unsafe weight-cut instructions. | Audit answers against the cited official event page, registration record, and applicable policy. Count unsupported answers / audited factual answers by task type; use human review for disputed labels. | Any invented high-stakes rule or unsafe instruction stops automation for that route and enters human review. Above 2% in a sufficiently sized audit triggers rollback and a source/prompt audit. |
+| Latency (p95) | At most 5 seconds from request to visible answer for automated responses. | Record end-to-end request time in product telemetry; review the 95th percentile over a rolling day, with call count and route shown. Include retrieval, model calls, checks, and retries. | Above 8 seconds for 15 minutes on meaningful traffic pages the on-call owner; show a sourced fallback or an explicit handoff rather than a silent wait. |
+| Drift velocity | No decline greater than 5 percentage points in rubric pass rate from the approved baseline over four weeks; zero new critical failures. | Weekly review of newly collected, human-adjudicated cases by task and risk tier, compared with the same versioned baseline. Record model, prompt, router, and source versions so a change can be traced. | A decline greater than 5 points across two weekly reviews triggers a gold-set and routing audit. Any new critical failure triggers immediate route pause or rollback. |
+
+**Critical gate:** A seemingly high aggregate score never cancels a failure on an unsafe weight-cut request or a wrong event rule. Targets and alert bands must be recalibrated from real reviewed cases before they become release claims; rare failures need raw case review, not percentages alone.
 
 ## HITL Architecture
 
-<!-- When does a human step in? What's the escalation path? -->
+1. **Check evidence first.** The service retrieves the relevant event, registration, and wearable records and checks source, timestamp, completeness, and conflicts. The model router can choose an answer model, but it cannot bypass these rules.
+2. **Answer automatically only when supported.** For a low-risk question with a current, matching source, give the answer with its source and let the athlete correct it. If evidence is incomplete, say what is missing instead of filling the gap.
+3. **Escalate the risky cases.** Conflicting event instructions, uncertain registration or weigh-in rules, user-reported errors, stale wearable data that would affect readiness, and requests for aggressive weight cutting do not receive a confident automated recommendation. Show the reason and the next action. Event-rule disputes go to the organizer or a designated event-support reviewer; health and weight-cut decisions go to a qualified clinician or coach. The app must not imply that either service is already integrated.
+4. **Close the loop.** Log the question, retrieved source versions, route, answer, uncertainty reason, and reviewer decision. A domain reviewer checks proposed corrections before adding a versioned case to the golden dataset. Rerun regression tests before changing routing or thresholds.
+
+**Before production:** name the actual reviewer/on-call owner, define response-time commitments and contact paths, and verify that the escalation queue and monitoring exist. An LLM-as-a-judge may help with offline regression and sampled audits after calibration against human labels; it is not the sole live authority for a risky answer.
 
 ## Red-Team Findings
 
