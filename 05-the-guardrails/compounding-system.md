@@ -25,3 +25,22 @@ Connect these records to one athlete and one competition preparation cycle. A re
 Assume the underlying AI model does not improve for three months. Does BJJ Ready to Go get better because it has learned from verified corrections and preparation outcomes?
 
 **Current answer:** Unknown. We need to compare later recommendations with earlier ones on similar cases. More data or more users alone would not prove compounding.
+
+<!-- Governance Policy, BJJ Ready to Go — Athlete Preparation Assistant v1 -->
+
+## Governance Policy
+
+**Scope:** AI-generated competition preparation guidance using athlete-provided training and weight logs, connected wearable data, and public tournament information. Includes data summaries, weight trend estimates, reminders, and preparation suggestions. Athletes review and choose whether to follow suggestions. Excludes: Medical diagnosis or treatment, injury clearance, guaranteed competition outcomes, and instructions for rapid weight cutting, dehydration, or ignoring concerning symptoms.
+
+**Autonomy boundaries:** Summarize synced training, sleep, and recovery data, auto. Show weight trends and estimate progress toward the athlete’s stated division, auto. Recommend changes to training or weight-management plans, human approval required. Give medical advice, diagnose symptoms, or recommend dehydration or rapid weight-cut tactics, never auto. Change competition registration, weight class, or event booking, never auto.
+
+**Escalation triggers:** 1. The athlete reports fainting, chest pain, severe dehydration, injury, or another concerning symptom: stop weight-cut guidance and direct them to a qualified medical professional. 2. The requested weight change appears aggressive or the timeline is unclear: do not suggest a cut plan; recommend speaking with a qualified coach or sports dietitian. 3. Tournament date, weigh-in time, division, or weight limit is missing or conflicting: show the conflicting sources and ask the athlete to confirm with the organizer. 4. Wearable or weight data is missing, stale, or inconsistent: label the information incomplete and ask the athlete to verify it before using it for guidance. 5. The athlete asks for a human review or says the guidance is wrong.
+
+**Audit cadence:** Real-time, Data-sync failures, stale readings, and safety escalation events (Engineering on-call). Weekly, A sample of AI guidance, athlete corrections, escalations, and reported issues (Product manager). Monthly, Weight-guidance safety, event-information accuracy, user complaints, and recurring failure patterns (Product manager with a qualified BJJ coach or sports dietitian). Weekly, Changes to prompts, models, data sources, safety rules, and escalation behavior against the approved test cases (Product and engineering).
+
+**Regulatory exposure (EU AI Act / other):** GDPR and applicable data-protection requirements for personal and potentially health-related data. Confirm applicable obligations with privacy counsel before launch.. Risk tier: limited. Controls: Collect only data needed for the preparation features; obtain clear consent for wearable connections; let athletes disconnect integrations and delete their data; label estimates and data freshness; do not present the product as medical advice; block dangerous rapid-cut or dehydration guidance; require athlete confirmation before changing plans; log AI recommendations, source data, corrections, and escalations; provide a clear route to a qualified human..
+
+## Agent Topology
+
+No autonomous agents in v1. The product may summarize data, show trends, and draft preparation suggestions. It cannot change training or weight plans, register the athlete for an event, change their division, contact anyone, or take medical action. The athlete decides what to follow; safety concerns are directed to a qualified professional.
+
