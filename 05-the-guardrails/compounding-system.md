@@ -63,3 +63,40 @@ Assume the underlying AI model does not improve for three months. Does BJJ Ready
 
 No autonomous agents in v1. The product may summarize data, show trends, and draft preparation suggestions. It cannot change training or weight plans, register the athlete for an event, change their division, contact anyone, or take medical action. The athlete decides what to follow; safety concerns are directed to a qualified professional.
 
+Shadow AI Audit (user-side), Module 5
+
+## Discover, User-Side Workarounds
+- Athletes track daily weight and target weigh-in in a spreadsheet | source: Support ticket | signal: Workflow gap | freq: M | spend: $0/mo | decision: TBD
+- Athletes check Garmin or Apple Health separately, then interpret readiness alongside training notes | source: Support ticket | signal: Capability gap | freq: M | spend: $0/mo | decision: Partner
+- Athletes paste weight, training history, and competition date into ChatGPT for a prep plan | source: Support ticket | signal: Capability gap | freq: H | spend: $0/mo | decision: Build
+- Athletes use WhatsApp or direct messages with their coach for weight and training check-ins | source: Support ticket | signal: Trust gap | freq: M | spend: $0/mo | decision: Partner
+- Athletes check tournament pages and calendars manually for registration and weigh-in deadlines | source: Support ticket | signal: Workflow gap | freq: M | spend: $0/mo | decision: Partner
+
+## Pattern Assessment
+- Workarounds found: 5
+- Build candidates: 1
+- Partner candidates: 3
+- Ignore decisions: 0
+- Adjacent spend: $0/mo
+- Dominant signal: Workflow gap
+
+## Action Plan
+### Build
+Potential build candidates: weight-to-weigh-in tracking, BJJ-specific competition prep, and structured athlete-coach check-ins. Validate which workarounds recur before prioritizing.
+
+### Partner
+Garmin and Apple Health data access; official tournament registration and weigh-in data.
+
+### Ignore + Monitor
+Generic AI-generated training plans as a standalone feature. Monitor whether athletes keep using them and what they still have to do manually.
+
+## Roadmap Brief
+Based on your audit: 5 user-side workarounds discovered.
+Decisions: 1 build · 3 partner · 0 ignore · 1 TBD.
+Estimated adjacent spend: $0/mo across surveyed users.
+Dominant signal: Workflow gap.
+
+Recommended next step: Workflow gaps dominate, your users are stitching your product into multi-step pipelines. Strongest near-term move is partner integrations with the AI tools they already chain in.
+
+Sequence the Build column by frequency × strategic relevance. Confirm Partner candidates with the external tools' partnership teams. Re-run this audit each quarter, workarounds shift fast.
+
