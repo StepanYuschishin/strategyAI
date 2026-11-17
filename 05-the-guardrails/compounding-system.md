@@ -1,3 +1,22 @@
+## Feedback Loops
+
+| Loop | Input | Output | Compounds? | Status |
+|------|-------|--------|-----------|--------|
+| Recursive Learning | Athlete corrections to weight targets, training recommendations, and recovery guidance; weigh-in results and post-competition feedback. | With athlete consent, reviewed corrections become labeled examples for improving weight-readiness estimates and recommendations; approved cases are added to the evaluation set. | Y | missing |
+| Cross-Domain Transfer | Competition schedule and rules, athlete weight trends, training load, recovery signals, and wearable data. | A more relevant preparation plan that connects competition deadlines, weight readiness, training, and recovery for that athlete. | N | missing |
+| Network Intelligence | Opt-in participation and verified, aggregated signals from athletes and competitions. | Better cohort-level benchmarks for preparation and weight trends, without exposing individual athletes’ data. | N | missing |
+
+**Broken loop identified by partner:** Recursive Learning — athlete corrections and actual weigh-in outcomes are not yet captured in a consistent, reviewed feedback loop.
+**Fix plan:** Add a post-weigh-in check-in for planned vs. actual weight and a way to correct recommendations. With consent, review and label the feedback, then add suitable cases to the evaluation set before using them to improve recommendations. Owner: Product.
+
+## Context Connectivity
+<!-- How does knowledge flow across teams and domains? Where does it silo? -->
+
+**How knowledge flows:** Competition rules and schedules, athlete check-ins, and consented wearable data feed the athlete’s preparation plan. Coaches and athletes can correct it; reviewed corrections inform product evaluations.
+
+**Where it silos:** Competition information, wearable data, and athlete feedback come from separate sources. Without consent, consistent formats, and review, they cannot safely be combined into a reliable learning loop.
+
+
 # BJJ Ready to Go — Compounding System
 
 ## Feedback Loops
