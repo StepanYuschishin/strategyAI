@@ -1,102 +1,67 @@
-# My AI Product Strategy
-
-> A living strategy built across 6 sessions. Each module adds one component. By Module 6, this repo IS your strategy — version-controlled, board-ready, portable.
-
----
+# BJJ Athlete Training Strategy
 
 ## Strategy at a Glance
 
-| Component | Module | Status | Key Artifact |
-|-----------|--------|--------|-------------|
-| **The Bet** | M1 | [ ] | `01-the-bet/` |
-| **The Moat** | M2 | [ ] | `02-the-moat/` |
-| **The Margin** | M3 | [ ] | `03-the-margin/` |
-| **The Contract** | M4 | [ ] | `04-the-contract/` |
-| **The Guardrails** | M5 | [ ] | `05-the-guardrails/` |
-| **The Pitch** | M6 | [ ] | `06-the-pitch/` |
+Build a trusted training companion for Brazilian Jiu-Jitsu athletes that connects training, competition preparation, weight management, and coach support. Focus on the workflows athletes currently piece together themselves, while partnering for health and tournament data that the product should not recreate.
 
----
+## Product Direction
 
-## The Bet (M1)
+Help athletes prepare consistently for training and competition with structured, sport-specific workflows and useful context from their existing tools.
 
-**What we're building, for whom, why now.**
+Prioritize recurring athlete needs over generic AI-generated plans. Keep coaches involved in meaningful check-ins and make competition preparation specific to BJJ.
 
-- **Product:**
-- **AI Value Archetype:**
-- **Vulnerability Scores:** Moat __/5 · Data __/5 · Platform __/5
-- **Top Risk:**
-- **Confidence:** H / M / L
-- **Prototype:** [link]
-- **Kill Criteria:**
+## Shadow AI Audit
 
-→ Details: [`01-the-bet/`](01-the-bet/)
+Five user-side workarounds were identified:
 
----
+1. Weight-to-weigh-in tracking.
+2. BJJ-specific competition preparation.
+3. Structured athlete-coach check-ins.
+4. Garmin data access.
+5. Apple Health data access.
+6. Official tournament registration and weigh-in data.
+7. Generic ChatGPT-generated plans used outside the product.
 
-## The Moat (M2)
+The audit summary recorded five workarounds, one build candidate, three partner candidates, and no ignore decisions, with workflow gaps as the dominant signal. The action plan groups weight tracking, competition preparation, and coach check-ins as potential build candidates, pending validation of how often they recur.
 
-**Why this won't get copied in 6 months.**
+## Build
 
-- **Data Flywheel Score:** __/20
-- **Weakest Loop:**
-- **Competitive Position:** [describe axes + placement]
-- **Encroachment Defense:**
-- **Vendor Portability:** Ready / Partial / Locked
+Potentially bring these workflows into the product:
 
-→ Details: [`02-the-moat/`](02-the-moat/)
+- Weight-to-weigh-in tracking.
+- BJJ-specific competition preparation.
+- Structured athlete-coach check-ins.
 
----
+Validate which workarounds recur most often before prioritizing implementation.
 
-## The Margin (M3)
+## Partner
 
-**Will this make money or bleed it?**
+Explore official integrations for:
 
-- **Gross Margin (current):**
-- **Gross Margin (AI-adjusted):**
-- **Pricing Model:**
-- **Cascading Strategy:**
-- **Break-even at:**
+- Garmin and Apple Health data.
+- Tournament registration and weigh-in data.
 
-→ Details: [`03-the-margin/`](03-the-margin/)
+## Ignore and Monitor
 
----
+Do not treat generic ChatGPT-generated plans as a standalone product feature yet. Monitor whether athletes continue using them and which parts of their workflow remain manual.
 
-## The Contract (M4)
+## Governance and Risk
 
-**Why users will trust a probabilistic system.**
+Review data handling for health, weight, and athlete information. Define access controls, human oversight, escalation paths, and a regular review cadence before expanding automated recommendations.
 
-- **Reliability Target:**
-- **Golden Dataset:** __ rows, __ adversarial
-- **Confidence UX:** [approach]
-- **HITL Architecture:**
-- **Failure Mode Coverage:**
+## Compounding System
 
-→ Details: [`04-the-contract/`](04-the-contract/)
+Map and validate the product's learning loops before claiming that usage improves the system. For each loop, document its input, output, whether it compounds, and whether it is active, broken, or missing.
 
----
+Candidate loops to assess:
 
-## The Guardrails (M5)
+- **Recursive learning:** athlete corrections and feedback inform better training or competition-preparation guidance.
+- **Cross-domain transfer:** training, health, and competition context improve recommendations across workflows, subject to user consent and data permissions.
+- **Network intelligence:** aggregated insights improve the product across athletes or coaches only where privacy, consent, and appropriate safeguards allow it.
 
-**What breaks when this scales — and what compounds.**
+## Open Validation
 
-- **Compounding System:** [describe feedback loops]
-- **Governance Posture:** [approach]
-- **Shadow AI Status:** __ tools found, __ triaged
-- **Agent Boundaries:**
-- **Regulatory Exposure:**
-
-→ Details: [`05-the-guardrails/`](05-the-guardrails/)
-
----
-
-## The Pitch (M6)
-
-**How you get this funded, shipped, and adopted.**
-
-- **Horizon 1 (Now):**
-- **Horizon 2 (Next):**
-- **Horizon 3 (Bet):**
-- **Board Narrative:** [1-sentence thesis]
-- **Key Metric:**
-
-→ Details: [`06-the-pitch/`](06-the-pitch/)
+- Which workarounds appear most frequently in athlete interviews and support requests?
+- Which data sources can be accessed reliably and with user consent?
+- What should remain coach-led rather than automated?
+- Which feedback signals can safely and measurably improve the product?
